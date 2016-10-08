@@ -1,5 +1,4 @@
 Semaphore: function Semaphore() {
-	
 }
 
 // take one resource, if the semaphore is occupied, try 10 seconds after
