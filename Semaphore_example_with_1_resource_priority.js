@@ -8,9 +8,8 @@ function log(message) {
 function thread(thread_name, priority, timeout) {
 	//function_with_semaphore("thread " + i, priority);
 	
-	
 	sem.p(function() { // In this example, we use Semaphore with 1 resource
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration start critic section");
 			function_with_semaphore(thread_name, 1);
 		}, 20);
@@ -25,38 +24,38 @@ function function_with_semaphore(thread_name, execution_number) {
 		
 	}
 	else if (execution_number === 1) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration 1");
 			function_with_semaphore(thread_name, 2);
 		}, 10);
 	}
 	else if (execution_number === 2) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration 2");
 			function_with_semaphore(thread_name, 3);
 		}, 30);
 	}
 	else if (execution_number === 3) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration 3");
 			function_with_semaphore(thread_name, 4);
 		}, 15);
 	}
 	else if (execution_number === 4) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration 4");
 			function_with_semaphore(thread_name, 5);
 		}, 25);
 	}
 	else if (execution_number === 5) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration 5");
 			function_with_semaphore(thread_name, 6);
 		}, 35);
 	}
 	// end of the function
 	else if (execution_number === 6) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration finish critic section");
 			sem.v(); /////////////////// Your critic section finish when you call sem.v()
 		}, 75);
@@ -64,9 +63,7 @@ function function_with_semaphore(thread_name, execution_number) {
 	
 }
 
-// Init an object that contains .sem property to pass it to the semaphore
-// We declare 1 resource only
-var sem = new semaphore.Semaphore(1);
+var sem = new semaphore.Semaphore(1); // We declare 1 resource only
 
 // start 4 threads
 thread("thread 1", 10); // thread 1 with priority 10
@@ -74,10 +71,8 @@ thread("thread 2", 20); // thread 2 with priority 20
 thread("thread 3", 15); // thread 3 with priority 15
 thread("thread 4", 25); // thread 4 with priority 25
 
-
 // RESULT :
-// You can see that it's a beautiful order
-// With 1 resource, function_with_semaphore() is exectued once a time
+// You can see that thread 4 is executed first because of it's priority
 // time: thread iteration
 /*
 15:32:11.284: thread 1 iteration start critic section

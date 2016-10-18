@@ -8,9 +8,8 @@ function log(message) {
 function thread(thread_name, priority, timeout) {
 	//function_with_semaphore("thread " + i, priority);
 	
-	
 	sem.p(function() { // In this example, we use Semaphore with 1 resource
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration start critic section");
 			function_with_semaphore(thread_name, 1);
 		}, 20);
@@ -25,38 +24,38 @@ function function_with_semaphore(thread_name, execution_number) {
 		
 	}
 	else if (execution_number === 1) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration 1");
 			function_with_semaphore(thread_name, 2);
 		}, 10);
 	}
 	else if (execution_number === 2) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration 2");
 			function_with_semaphore(thread_name, 3);
 		}, 30);
 	}
 	else if (execution_number === 3) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration 3");
 			function_with_semaphore(thread_name, 4);
 		}, 15);
 	}
 	else if (execution_number === 4) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration 4");
 			function_with_semaphore(thread_name, 5);
 		}, 25);
 	}
 	else if (execution_number === 5) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration 5");
 			function_with_semaphore(thread_name, 6);
 		}, 35);
 	}
 	// end of the function
 	else if (execution_number === 6) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration finish critic section");
 			sem.v(); /////////////////// Your critic section finish when you call sem.v()
 		}, 75);
@@ -64,9 +63,8 @@ function function_with_semaphore(thread_name, execution_number) {
 	
 }
 
-// Init an object that contains .sem property to pass it to the semaphore
-// We declare 2 resources
-var sem = new semaphore.Semaphore(2);
+
+var sem = new semaphore.Semaphore(2); // We declare 2 resources
 
 // start 5 threads
 thread("thread 1");

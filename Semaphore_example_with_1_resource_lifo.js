@@ -8,9 +8,8 @@ function log(message) {
 function thread(thread_name, priority, timeout) {
 	//function_with_semaphore("thread " + i, priority);
 	
-	
 	sem.p(function() { // In this example, we use Semaphore with 1 resource
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration start critic section");
 			function_with_semaphore(thread_name, 1);
 		}, 20);
@@ -25,38 +24,38 @@ function function_with_semaphore(thread_name, execution_number) {
 		
 	}
 	else if (execution_number === 1) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration 1");
 			function_with_semaphore(thread_name, 2);
 		}, 10);
 	}
 	else if (execution_number === 2) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration 2");
 			function_with_semaphore(thread_name, 3);
 		}, 30);
 	}
 	else if (execution_number === 3) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration 3");
 			function_with_semaphore(thread_name, 4);
 		}, 15);
 	}
 	else if (execution_number === 4) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration 4");
 			function_with_semaphore(thread_name, 5);
 		}, 25);
 	}
 	else if (execution_number === 5) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration 5");
 			function_with_semaphore(thread_name, 6);
 		}, 35);
 	}
 	// end of the function
 	else if (execution_number === 6) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration finish critic section");
 			sem.v(); /////////////////// Your critic section finish when you call sem.v()
 		}, 75);
@@ -64,9 +63,7 @@ function function_with_semaphore(thread_name, execution_number) {
 	
 }
 
-// Init an object that contains .sem property to pass it to the semaphore
-// We declare 1 resource only
-var sem = new semaphore.Semaphore(1, null, null, true);
+var sem = new semaphore.Semaphore(1, null, null, true); // We declare 1 resource only with lifo = true
 
 // start 4 threads
 thread("thread 1"); // thread 1
@@ -74,8 +71,8 @@ thread("thread 2"); // thread 2
 thread("thread 3"); // thread 3
 thread("thread 4"); // thread 4
 
-
 // RESULT :
+// You can see that the last thread is executed the first
 // time: thread iteration
 /*
 15:20:52.690: thread 1 iteration start critic section

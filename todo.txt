@@ -1,0 +1,14 @@
+/*
+ * Todo list
+ */
+
+Make Semaphore work with negative initial resource
+ 
+Make MySemaphore.getNumberFreeResources(); // Get the number of free resources
+test it in every sense
+
+Make :
+MySemaphore = new Semaphore(numberResources, defaultPriority, defaultTimeoutBetweenCallback, lifo);
+MySemaphore.setNumberResources(numberResources); // Set the number of resource, let the actual callbacks end or execute callback in the queue. Be careful, if you set a negative number, it will block the Semaphore
+MySemaphore.addResources(numberResources); // add numberResources, if negative, call subResources(Math.abs(numberResources))
+MySemaphore.subResources(numberResources); // sub numberResources, if negative, call addResources(Math.abs(numberResources))

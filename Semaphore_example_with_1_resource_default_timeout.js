@@ -8,9 +8,8 @@ function log(message) {
 function thread(thread_name, priority, timeout) {
 	//function_with_semaphore("thread " + i, priority);
 	
-	
 	sem.p(function() { // In this example, we use Semaphore with 1 resource
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration start critic section");
 			function_with_semaphore(thread_name, 1);
 		}, 20);
@@ -25,38 +24,38 @@ function function_with_semaphore(thread_name, execution_number) {
 		
 	}
 	else if (execution_number === 1) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration 1");
 			function_with_semaphore(thread_name, 2);
 		}, 10);
 	}
 	else if (execution_number === 2) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration 2");
 			function_with_semaphore(thread_name, 3);
 		}, 30);
 	}
 	else if (execution_number === 3) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration 3");
 			function_with_semaphore(thread_name, 4);
 		}, 15);
 	}
 	else if (execution_number === 4) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration 4");
 			function_with_semaphore(thread_name, 5);
 		}, 25);
 	}
 	else if (execution_number === 5) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration 5");
 			function_with_semaphore(thread_name, 6);
 		}, 35);
 	}
 	// end of the function
 	else if (execution_number === 6) {
-		setTimeout(function(element) {
+		setTimeout(function() {
 			log(thread_name + " iteration finish critic section");
 			sem.v(); /////////////////// Your critic section finish when you call sem.v()
 		}, 75);
@@ -64,9 +63,7 @@ function function_with_semaphore(thread_name, execution_number) {
 	
 }
 
-// Init an object that contains .sem property to pass it to the semaphore
-// We declare 1 resource only
-var sem = new semaphore.Semaphore(1, null, 1000); // 1000 milliseconds is the default timeout between each callback
+var sem = new semaphore.Semaphore(1, null, 1000); // We declare 1 resource only with a default timeout at 1000 milliseconds between each callback
 
 // start 4 threads
 thread("thread 1"); // thread 1, default timeout
@@ -74,8 +71,8 @@ thread("thread 2"); // thread 2, default timeout
 thread("thread 3", null, 2000); // thread 3, 2000milliseconds timeout
 thread("thread 4"); // thread 3, default timeout
 
-
 // RESULT :
+// You can see that between each thread, 1 second have passed except between thread 2 and 3 where 2 seconds have passed
 // time: thread iteration
 /*
 15:18:52.414: thread 1 iteration start critic section
