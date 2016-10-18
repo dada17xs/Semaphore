@@ -196,7 +196,7 @@ Semaphore.prototype.v = function() {
 			//console.log("____prototype.v(): if : setTimeout");
 			setTimeout(function() {
 				selectedCallback.callback();
-			}, (selectedCallback.timeoutBetweenCallback != null && selectedCallback.timeoutBetweenCallback >= 0) ? selectedCallback.timeoutBetweenCallback : (this.defaultTimeoutBetweenCallback != null && this.defaultTimeoutBetweenCallback >= 0) ? this.defaultTimeoutBetweenCallback : 0); // setTimeout(function(){}, 0); re-queues the function at the end of the JavaScript execution queue
+			}, (selectedCallback.timeoutBetweenCallback != null && selectedCallback.timeoutBetweenCallback >= 0) ? selectedCallback.timeoutBetweenCallback : 0); // setTimeout(function(){}, 0); re-queues the function at the end of the JavaScript execution queue
 		}
 		else {
 			//console.log("____prototype.v(): else");

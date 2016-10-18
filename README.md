@@ -606,8 +606,9 @@ MySemaphore.getStackSize(); // get the actual queue size
 # How it's possible
 JavaScript is a monothread language. But sometimes, if you have a lot of asynchrones functions, you'll want that a portion of your code is executed once a time. So you can use Semaphore.js to do this.
 This is possible in JavaScript because each function is atomic and because JavaScript is monothread. This is important, if JavaScript will not stay monothread in the futur, this script will no longer work. If JavaScript functions were not atomic, errors could have happen.
+To learn more on Semaphore, see https://en.wikipedia.org/wiki/Semaphore_(programming)
 
-# School example
+# School examples
 ## hairdressing example
 coming soon...
 

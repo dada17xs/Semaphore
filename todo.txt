@@ -3,6 +3,7 @@
  */
 
 Make Semaphore work with negative initial resource
+look https://fr.wikipedia.org/wiki/S%C3%A9maphore_(informatique) et poly d'école pour comprendre p() et v()
  
 Make MySemaphore.getNumberFreeResources(); // Get the number of free resources
 test it in every sense
@@ -12,3 +13,6 @@ MySemaphore = new Semaphore(numberResources, defaultPriority, defaultTimeoutBetw
 MySemaphore.setNumberResources(numberResources); // Set the number of resource, let the actual callbacks end or execute callback in the queue. Be careful, if you set a negative number, it will block the Semaphore
 MySemaphore.addResources(numberResources); // add numberResources, if negative, call subResources(Math.abs(numberResources))
 MySemaphore.subResources(numberResources); // sub numberResources, if negative, call addResources(Math.abs(numberResources))
+
+Make : School examples -> hairdressing example
+
