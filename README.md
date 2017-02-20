@@ -1,4 +1,4 @@
-# Semaphore
+# Semaphore.js
 To use semaphore with JavaScript
 
 # Constructor
